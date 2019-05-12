@@ -11,7 +11,7 @@ from extractor import PitchExtractor
 xtr = PitchExtractor()
 xtr.load_midi('beethoven.mid')
 
-xtr.get_pitches()
+pitches = xtr.get_pitches()
 ```
 
 To get a list of notes instead of notes instead of midi values use `xtr.get_pitches(note_names=True)`
