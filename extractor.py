@@ -24,7 +24,7 @@ class PitchExtractor:
                 
         self.pitches = pitches
         
-    def pitches(self, note_names=False):
+    def get_pitches(self, note_names=False):
         if not self.pitches:
             raise ValueError('No pitches found')
 
