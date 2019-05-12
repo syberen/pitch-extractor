@@ -1,6 +1,6 @@
 import math
 
-class PitchAnalyzer:
+class PitchExtractor:
     def load_midi(self, file_path):
         with open(file_path, 'rb') as midi_file:
             leader = midi_file.read(4)
