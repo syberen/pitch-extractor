@@ -3,8 +3,7 @@ import math
 
 class PitchExtractor:
     def __init__(self, file_path):
-        if file_path:
-            self.load_midi(file_path)
+        self.load_midi(file_path)
 
     def load_midi(self, file_path):
         with open(file_path, 'rb') as midi_file:
@@ -15,19 +14,6 @@ class PitchExtractor:
             data_hex = midi_file.read().hex()
 
             self._data_hex = data_hex
-
-    def _create_pitch_list(self):
-        pitches = []
-
-        for index, byte in enumerate(self._data_hex):
-            is_pitch = index % 2 == 0 and byte == '9'
-            is_note_on = self._data_hex[index + 4: index + 6] != '00'
-
-            if is_pitch and is_note_on:
-                pitch_hex = self._data_hex[index + 2: index + 4]
-                pitches.append(int(pitch_hex, 16))
-
-        return pitches
 
     def _get_note_names(self, pitch_list):
         notes = []
@@ -43,12 +29,17 @@ class PitchExtractor:
         return notes
 
     def pitches(self, note_names=False):
-        if not self._data_hex:
-            raise ValueError('No file loaded')
+        pitches = []
 
-        pitch_list = self._create_pitch_list()
+        for index, byte in enumerate(self._data_hex):
+            is_pitch = index % 2 == 0 and byte == '9'
+            is_note_on = self._data_hex[index + 4: index + 6] != '00'
+
+            if is_pitch and is_note_on:
+                pitch_hex = self._data_hex[index + 2: index + 4]
+                pitches.append(int(pitch_hex, 16))
 
         if note_names:
-            return self._get_note_names(pitch_list)
+            return self._get_note_names(pitches)
 
-        return pitch_list
+        return pitches
