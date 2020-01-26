@@ -22,7 +22,7 @@ class PitchExtractor:
         self._file_format = int.from_bytes(track_info[4: 6], 'big')
 
     def _remove_tempo_track(self):
-        track_header = '4d54726b'
+        track_header = '4d54726b'  # MTrk in hex
 
         # Start loop after current track header
         for i in range(8, len(self._track_data_hex), 2):
