@@ -47,12 +47,12 @@ class PitchExtractor:
     def get_pitches(self, note_names=False):
         pitches = []
 
-        for index, byte in enumerate(self._track_data_hex):
-            is_pitch = index % 2 == 0 and byte == '9'
-            is_note_on = self._track_data_hex[index + 4: index + 6] != '00'
+        for i in range(0, len(self._track_data_hex), 2):
+            is_pitch = self._track_data_hex[i] == '9'
+            is_note_on = self._track_data_hex[i + 4: i + 6] != '00'
 
             if is_pitch and is_note_on:
-                pitch_hex = self._track_data_hex[index + 2: index + 4]
+                pitch_hex = self._track_data_hex[i + 2: i + 4]
                 pitches.append(int(pitch_hex, 16))
 
         if note_names:
