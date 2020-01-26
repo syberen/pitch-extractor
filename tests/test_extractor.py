@@ -14,15 +14,16 @@ class TestExtractor(unittest.TestCase):
         expected_result = [60, 60, 67, 67, 69,
                            69, 67, 65, 65, 64, 64, 62, 62, 60]
 
-        self.assertEqual(self.pxt.pitches(), expected_result)
+        self.assertEqual(self.pxt.get_pitches(), expected_result)
 
     def test_pithes_with_note_names(self):
-        """ Should return a list note names"""
+        """ Should return a list of note names"""
         self.pxt = PitchExtractor('tests/test_files/twinkle.mid')
         expected_result = ['C5', 'C5', 'G5', 'G5', 'A5', 'A5',
                            'G5', 'F5', 'F5', 'E5', 'E5', 'D5', 'D5', 'C5']
 
-        self.assertEqual(self.pxt.pitches(note_names=True), expected_result)
+        self.assertEqual(self.pxt.get_pitches(
+            note_names=True), expected_result)
 
     def test_get_note_names(self):
         """ Take in a list of midi values and return a list of note names"""
@@ -33,6 +34,14 @@ class TestExtractor(unittest.TestCase):
                            'G5', 'F5', 'F5', 'E5', 'E5', 'D5', 'D5', 'C5']
 
         self.assertEqual(self.pxt._get_note_names(input), expected_result)
+
+    def test_get_file_format(self):
+        """ Should return the correct midi file format"""
+        self.pxt = PitchExtractor('tests/test_files/twinkle.mid')
+        self.assertEqual(self.pxt.get_file_format(), 0)
+
+        self.pxt = PitchExtractor('tests/test_files/twinkle_multitrack.mid')
+        self.assertEqual(self.pxt.get_file_format(), 1)
 
 
 if __name__ == '__main__':
