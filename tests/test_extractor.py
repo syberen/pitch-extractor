@@ -17,7 +17,7 @@ class TestExtractor(unittest.TestCase):
         self.assertEqual(self.pxt.get_pitches(), expected_result)
 
     def test_pithes_with_note_names(self):
-        """ Should return a list note names"""
+        """ Should return a list of note names"""
         self.pxt = PitchExtractor('tests/test_files/twinkle.mid')
         expected_result = ['C5', 'C5', 'G5', 'G5', 'A5', 'A5',
                            'G5', 'F5', 'F5', 'E5', 'E5', 'D5', 'D5', 'C5']
