@@ -18,7 +18,7 @@ To get a list of notes instead of notes instead of midi values use
 pxt.get_pitches(note_names=True) # ['C5', 'C5', 'G5', 'G5', 'A5', 'A5', 'G5', 'F5', 'F5', 'E5', 'E5', 'D5', 'D5', 'C5']
 ```
 
-Check whether the loaded midi file is of type 0, 1 or 2:
+Check whether the loaded midi file has format 0, 1 or 2:
 ```python
 pxt.get_file_format() # 0
 ```
